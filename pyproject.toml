@@ -1,0 +1,10 @@
+[project]
+name = "fantasy-football"
+version = "0.1.0"
+description = "Weekly start/sit and lineup optimizer for ESPN fantasy football"
+requires-python = ">=3.10"
+dependencies = [
+    "espn_api",
+    "nflreadpy",
+    "python-dotenv",
+]
