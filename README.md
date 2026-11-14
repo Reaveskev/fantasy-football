@@ -54,7 +54,7 @@ TEAM_ID=your_team_id
 ## Usage
 
 ```bash
-python explore.py
+python main.py
 ```
 
 Run it before the week's games start; once games kick off, projections are replaced by live scores.
