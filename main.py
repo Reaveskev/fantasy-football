@@ -1,17 +1,16 @@
 from optimizer import optimize_lineup
 from espn_client import get_roster
-from config import league_id, year, espn_s2, swid, my_team_id
+from config import  load_config
 from projections import score_projection
 
 
 
 def main():
+    config = load_config()    
 
-    roster = get_roster(league_id, year, espn_s2, swid, my_team_id)
+    roster = get_roster(league_id=config["LEAGUE_ID"],year=config["SEASON"], espn_s2=config["ESPN_S2"], swid=config["SWID"], my_team_id=config["TEAM_ID"])
 
     roster_projections = score_projection(roster)
-
-
 
     best_starters, bench, out, warnings = optimize_lineup(roster_projections)
 

@@ -1,35 +1,26 @@
 import os
 from dotenv import load_dotenv
 
-load_dotenv()
 
-league_id = os.getenv("LEAGUE_ID")
-espn_s2 = os.getenv("ESPN_S2")
-swid = os.getenv("SWID")
-year = os.getenv("SEASON")
-my_team_id = os.getenv("TEAM_ID")
+def load_config():
 
 
-if league_id is None:
-    print("League Id is coming back as None")
-    quit()
+    load_dotenv()
+    configs = {}
+
+    for name in ["LEAGUE_ID","ESPN_S2", "SWID", "SEASON", "TEAM_ID"]:
+        value = os.getenv(name)
+        if value is None:
+            raise ValueError(f'Missing {name} in .env.')
     
-     
-if espn_s2 is None:
-    print("Espn_2 is coming back as None")
-    quit()
 
-if swid is None:
-    print("swid is coming back as None")
-    quit()
+        configs[name] = value
+    
+    configs["SEASON"] = int(configs["SEASON"])
+    configs["LEAGUE_ID"] = int(configs["LEAGUE_ID"])
+    configs["TEAM_ID"] = int(configs["TEAM_ID"])
 
-if year is None:
-    print("Year is coming back as None")
-    quit()
-year = int(year)
 
-if my_team_id is None:
-    print("Team_id is coming back as None")
-    quit()
+    return configs
 
-my_team_id = int(my_team_id)
+
