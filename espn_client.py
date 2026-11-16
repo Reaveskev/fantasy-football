@@ -1,22 +1,31 @@
 from espn_api.football import League
 
 
-def get_roster(league_id, year, espn_s2, swid, my_team_id):
-    league = League(league_id=league_id, year=year, espn_s2=espn_s2, swid=swid)
+
+
+
+def get_league(config):
+    league = League(league_id=config["LEAGUE_ID"],year=config["SEASON"], espn_s2=config["ESPN_S2"], swid=config["SWID"])
+
+    return league
+
+
+
+# Connect to espn and grab roster
+def get_roster(league, team_id):
     teams = league.teams
     my_team = None
 
     for team in teams:
-        if team.team_id == my_team_id:
+        if team.team_id == team_id:
             my_team = team
             break
 
     if my_team is None:
-        raise ValueError(f"No team with ID {my_team_id} in league {league_id}.")
+        raise ValueError(f"No team with ID {team_id} in league {league.league_id}.")
 
     roster = my_team.roster
     nfl_week = league.nfl_week
-    
 
 
     players = []
@@ -30,15 +39,10 @@ def get_roster(league_id, year, espn_s2, swid, my_team_id):
         player_schedule = player.schedule
         on_bye = False
 
-
-
     
         if str(nfl_week) not in player_schedule:
             on_bye = True
         
-
-
-    
         player_info = {
                "name": name,
                "position": position, 
@@ -47,10 +51,8 @@ def get_roster(league_id, year, espn_s2, swid, my_team_id):
                "bye": on_bye
                }
 
-    
 
         players.append(player_info)
-
 
 
     return players

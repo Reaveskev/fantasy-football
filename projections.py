@@ -1,6 +1,8 @@
-
+# Grab espn projections
 def score_projection(players):
     player_projections = []
+    good_player_status_list = ["ACTIVE", "NORMAL"]
+    bad_player_status_list = ["OUT", "INJURY_RESERVE"]
 
     for player in players:
         flag = False
@@ -8,8 +10,7 @@ def score_projection(players):
         projection = player["espn_projection"]
 
 
-
-        good_player_status_list = ["ACTIVE", "NORMAL"]
+        
 
         if player["bye"]:
             projection = 0
@@ -17,7 +18,7 @@ def score_projection(players):
 
         elif player["status"] in good_player_status_list:
             pass
-        elif player["status"] == "OUT" or player["status"] == "INJURY_RESERVE":
+        elif player["status"] in bad_player_status_list:
             projection = 0
             reason = player["status"]
         else:
@@ -26,12 +27,12 @@ def score_projection(players):
 
 
         player_info = {
-    "name": player["name"],
-    "position": player["position"], 
-    "projection": projection, 
-    "flag": flag, 
-    "reason": reason
-    }
+        "name": player["name"],
+        "position": player["position"], 
+        "projection": projection, 
+        "flag": flag, 
+        "reason": reason
+        }
 
         player_projections.append(player_info)
 
