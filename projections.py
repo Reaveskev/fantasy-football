@@ -2,7 +2,7 @@
 def score_projection(players):
     player_projections = []
     good_player_status_list = ["ACTIVE", "NORMAL"]
-    bad_player_status_list = ["OUT", "INJURY_RESERVE"]
+    bad_player_status_list = ["OUT", "INJURY_RESERVE", "DOUBTFUL"]
 
     for player in players:
         flag = False

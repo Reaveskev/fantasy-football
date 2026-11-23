@@ -7,8 +7,6 @@ def optimize_lineup(roster_projections):
     roster_pool = []
 
 
-
-
     for p in roster_projections:
     
         if p["position"] == "K" or p["position"] == "D/ST":
@@ -20,9 +18,7 @@ def optimize_lineup(roster_projections):
 
 
 
-
     roster_pool.sort(key=lambda x: x["projection"], reverse=True)
-
 
 
     lineup = []
@@ -40,7 +36,6 @@ def optimize_lineup(roster_projections):
             lineup.append({"slot": slot, "player": None})
             warning = "No eligible player for " + slot
             warnings.append(warning)
-
 
 
 
